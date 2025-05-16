@@ -9,5 +9,23 @@ The purpose of this project is to build a review classification model, that does
 ## Data 
 The dataset contains `content` and `score` columns that respectively represent the review text and the rating given by the user based on their review. The score contains values between 0-5, reflecting the sentiment expressed in the review.
 
+## Model Buiding Pipeline 
+The model building pipeline contains several steps
+1. Preprocessing the dataset:
+ - Clean the dataset by removing stopwords and lemmatizing text to ensure an appropriate format.
+ - Tokenize the cleaned data for further processing.
+
+2. Model training
+ - Split the preprocessed dataset to training and testing sets.
+ - Build a GRU (Gated Recurrent Unit) model and train it using the training dataset.
+
+3. Model deployment
+- Develop a REST API using the Flask web framework to deploy the trained model.
+- Implement a model engine script using subprocesses to automate the execution of multiple processes.
+    
+
+
+
+
 ## The model engine 
 In order to build a robust and streamlined model pipeline, the python submodule **subprocess** was used to ochestrate multiple tasks in parallel using pre-defined functions. It leverages the subprocess module to trigger and run external scripts in seperate processes enabling modular execution of training, prediction or depoyment of the model in both development or production environment. The [model engine](SRC/engine_vidisha.py) demonstrates the ochestration of seperate scripts for data preprocessing, model training and deployment.
