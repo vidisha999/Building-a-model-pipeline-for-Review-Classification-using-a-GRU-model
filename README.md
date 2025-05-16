@@ -24,6 +24,38 @@ The model building pipeline contains several steps
 - Implement a model engine script using subprocesses to automate the execution of multiple processes.
     
 
+### Preprocessing the dataset 
+#### 1. Cleaning the dataset 
+
+The text data is often in incosistent formats which must be structured and standerdized to an appropriate format for the machine learning model, enabling machine learning models to deliver more accurate predictions and reliable insights.
+
+Stopwords are common words that are found in the text data which don't add a significant meaning to text analysis. Removing stopwords helps improve model efficiency and reduces noise in the dataset. These words vary by language, and predefined lists exist for different NLP applications. Stop words ca be accessed using the text corpus of the **NLTK** library which is a common python library used in NLP ( Natural Language  Processing)tasks.
+
+Text data often contains different variations of the same words, introducing variability that needs to be standardized during preprocessing.Lemmatization is a data preprocessing technniqe that transforms words into their dictionary form (lemma), based on the context of the words while preserving their contextual meaning and linguistic integrity.
+
+The **cleaning(df,stopwords)** function within [preprocessing script](SRC/ML_pipeline_vidisha/preprocess_vidisha.py) demonstrates a sequence of steps used in data cleaning process. 
+```python
+
+import nltk
+import textblob
+from textblob import Word # use for lemmatization 
+from nltk.corpus import stopwords
+stop_words=stopwords.word('english') # should remove these words
+
+def cleaning(df,stop_words):
+    df['content'] = df['content'].apply(lambda x: ' '.join(x.lower() for x in x.split())) # convert words in the review text to lowercase 
+    df['content'] = df['content'].str.replace("[^0-9a-zA-Z\s]+", '') # Use a regex to replace special characters with spaces
+    df['content'] = df['content'].apply(lambda x: ' ' .join ( x for x in x.split() if x not in stop_words)) # remove stopwords 
+    df['content'] = df['content'].apply(lambda x: ' '.join([Word(x).lemmatize() for x in x.split()])) # lemmatize each word in review text
+    return df
+```
+
+
+
+
+
+
+
 
 
 
