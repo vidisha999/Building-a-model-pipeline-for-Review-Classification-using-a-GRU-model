@@ -55,7 +55,7 @@ def cleaning(df,stop_words):
   ![wordcloud](Images/image-gru.png)
 
 #### 2. Tokenizing the data
-Cleaned text data must be transformed into a structured format that machine learning algorithms can process and learn from the data for text analysis.Tokenization is the process of breaking down text into smaller units, known as tokens, which can be words, phrases, sentence or subwords.By enabling ML models to nderstand individual words and their contextual relationships in the text data it helps the model to effective analyze the text setiments.Effective tokenization enhances model performance by improving the accuracy and relevance of text-based predictions.
+Cleaned text data must be transformed into a structured format that machine learning algorithms can process and learn from the data for text analysis.Tokenization is the process of breaking down text into smaller units, known as tokens, which can be words, phrases, sentence or subwords.By enabling ML models to understand individual words and their contextual relationships in the text data it enable the model to effective analyze the text setiments and enhance the model performance by improving the accuracy and relevance of text-based predictions.
 
 In the model API, users can choose whether to train a new dataset, make real-time predictions on review data, or deploy the model. To automate the tokenization process based on the user's selection, the **tokenize(df,df_new,is_train)** function is defined in the [preprocessing script](SRC/ML_pipeline_vidisha/preprocess_vidisha.py). If user selects training option, the function builds a tokenizer using the training data and save the [trained tokenizer](Output/tokenizer.pkl) as a pickle file for future use.
 
@@ -67,12 +67,12 @@ The [utility module](SRC/ML_pipeline_vidisha/utils_vidisha.py) defines the the m
   from tensorflow.keras.preprocessing.sequence import pad_sequence
   def tokenize(df,df_new,is_train):
      if is_train==1:
-        tokenizer=Tokenizer(num_words=utils_vidisha.input_length,split=' ') #build tokenizer 
-        tokenizer.fit_on_texts(df_new['content'].values) # fit tokenizer to words in the training data
+        tokenizer=Tokenizer(num_words=input_length,split=' ') # build a tokenizer 
+        tokenizer.fit_on_texts(df_new['content'].values) # train the tokenizer on preprocessed training dataset
         with open('Output/tokenizer.pkl','wb') as handle:  # Save the tarined tokenizer
             pickle.dump(tokenizer, handle)
-        x=tokenizer.texts_to_sequences(df['content'].values) # tokenize the text in new data using the trainedd tokenizer
-        x=pad_sequences(x,utils_vidisha.input_length)
+        x=tokenizer.texts_to_sequences(df['content'].values) # tokenize the text in new data using the trained tokenizer
+        x=pad_sequences(x,input_length) # Convert tokenized sequences to a uniform length for ML model
         return x
 
     else:
@@ -81,7 +81,7 @@ The [utility module](SRC/ML_pipeline_vidisha/utils_vidisha.py) defines the the m
         x=tokenizer.texts_to_sequences(df['content'].values)
         x=pad_sequences(x,utils_vidisha.input_length)
         return x
-
+```
 
 
 
