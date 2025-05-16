@@ -50,9 +50,11 @@ def cleaning(df,stop_words):
     return df
 ```
 
+- The **wordcloud** library is used to  generate a word cloud that visually represents the most frequently occuring words in the prepocessed text data. The below image gives a quick insight about the dominant trends or themes in the app review text data, which are `app`, `design`,`good` and `easy`.
 
+  ![wordcloud](Images/image-gru.png)
 
-#### 2. Tokenize the data
+#### 2. Tokenizing the data
 Cleaned text data must be transformed into a structured format that machine learning algorithms can process and learn from the data for text analysis.Tokenization is the process of breaking down text into smaller units, known as tokens, which can be words, phrases, sentence or subwords.By enabling ML models to nderstand individual words and their contextual relationships in the text data it helps the model to effective analyze the text setiments.Effective tokenization enhances model performance by improving the accuracy and relevance of text-based predictions.
 
 
