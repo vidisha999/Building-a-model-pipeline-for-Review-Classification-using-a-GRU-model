@@ -190,29 +190,21 @@ response = requests.request("POST", url, headers=headers, data=payload) # sends 
 print(response.text)
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## The model engine 
 In order to build a robust and streamlined model pipeline, the python submodule **subprocess** was used to ochestrate multiple tasks in parallel using pre-defined functions. It leverages the subprocess module to trigger and run external scripts in seperate processes enabling modular execution of training, prediction or depoyment of the model in both development or production environment. The [model engine](SRC/engine_vidisha.py) demonstrates the ochestration of seperate scripts for data preprocessing, model training and deployment.
+
+## Conclusion
+This project successfully developed and deployed a review classification model capable of performing sentiment analysis on application review text data. By utilizing a GRU-based deep learning model, it effectively captured the sequential patterns in user reviews, allowing the system to classify sentiments with high accuracy. The automated model pipeline, powered by Python’s subprocess module, streamlined the execution of key processes—data preprocessing, model training, and deployment—in a modular and scalable manner.Overall, this project demonstrates the power of deep learning and automation in extracting valuable insights from textual data, paving the way for future improvements in sentiment analysis and user feedback evaluation.
+
+
+
+
+
+
+
+
+
+
+
+
+
