@@ -82,8 +82,18 @@ The [utility module](SRC/ML_pipeline_vidisha/utils_vidisha.py) defines the the m
         x=pad_sequences(x,utils_vidisha.input_length)
         return x
 ```
+### Model Training
+#### 1. Split the dataset for training and testing splits
 
+The target variable `score` contains numerical values ranging from 0 to 5. However, for sentiment analysis, it should be one-hot encoded to represent discrete sentiment categories—where 0 corresponds to "Very Negative" and 5 to "Very Positive." This encoding prevents the model from making incorrect ordinal assumptions, ensuring it treats sentiment scores as distinct classes rather than continuous values. 
+```python
+from sklearn.model_selection import train_test_split
+y = pd.get_dummies(df['score'])
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
+```
+ #### 2. Build and train the GRU model 
 
+ 
 
 
 
