@@ -2,7 +2,7 @@
 
 
 #!/bin/bash
-gunicorn -b 0.0.0.0:5001 -w 4 -t 5 wsgi:app
+gunicorn -b 0.0.0.0:5001 -w 4 -t 5 wsgi_vidisha:app
 
 
 ## setting up a gunicorn server to run the wsgi application 
