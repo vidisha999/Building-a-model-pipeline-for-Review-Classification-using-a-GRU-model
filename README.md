@@ -93,7 +93,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 ```
  #### 2. Build and train the GRU model 
 
-The **fit(x_train,y_train)** function in [train model](SRC/ML_pipeline_vidisha/train_model_vidisha.py) is  defined to iniitiate and train the model , when x and y sets of the training data are given. To ensure model works with the structured input, ***Embedding()*** layer  is placed at the start of the model layers to  transform the raw text tokens which are in numerical values to a dense vector representation that capture semantic meanings of the words. ***SpatialDropout()*** layer drops entire feature maps instead of randomly dropping neurons, ensuring the model doesn't become overly dependent on specific word patterns. This regularization technique prevents overfitting of the sequence-based text data and improve generalization making the model more robust for unseen data.
+The **fit(x_train,y_train)** function in [train model](SRC/ML_pipeline_vidisha/train_model_vidisha.py) is  defined to iniitiate and train the model , when x and y sets of the training data are given. 
+
+To ensure model works with the structured input, ***Embedding()*** layer  is placed at the start of the model layers to  transform the raw text tokens which are in numerical values to a dense vector representation that capture semantic meanings of the words. ***SpatialDropout()*** layer drops entire feature maps instead of randomly dropping neurons, ensuring the model doesn't become overly dependent on specific word patterns. This regularization technique prevents overfitting of the sequence-based text data and improve generalization making the model more robust for unseen data. The output, ***Dense()*** layer contains 5 neurons corresponding to 5 sentiment categories and uses softmax activation enabling model to assign confidence score to each sentiment category.
+
+
+
+
+
 
 
 
