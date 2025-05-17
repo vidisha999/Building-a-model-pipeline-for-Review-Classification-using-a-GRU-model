@@ -146,7 +146,10 @@ def get_review_class():
     review = data['review'] # extract content/ review string in the review key 
     prediction=apply_prediction(review,model)
     output= { "Review Score" : prediction}
-    return output 
+    return output
+
+if __name__== "__main__":
+    app.run(host='0.0.0.0', port=5001) #Runs at the port "50001" and with the host "0.0.0.0" allowing the sever accessible to any IP address
 ```
 
 
