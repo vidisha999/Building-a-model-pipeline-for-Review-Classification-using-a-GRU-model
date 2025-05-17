@@ -19,8 +19,10 @@ The model building pipeline contains several steps
  - Split the preprocessed dataset to training and testing sets.
  - Build a GRU (Gated Recurrent Unit) model and train it using the training dataset.
 
-3. Model deployment
+3. Model deployment via a REST API 
 - Develop a REST API using the Flask web framework to deploy the trained model.
+- Host the REST API on a server.
+- Deploy the Flask application as a production-ready server using Gunicorn. 
 - Implement a model engine script using subprocesses to automate the execution of multiple processes.
     
 
@@ -151,6 +153,23 @@ def get_review_class():
 if __name__== "__main__":
     app.run(host='0.0.0.0', port=5001) #Runs at the port "50001" and with the host "0.0.0.0" allowing the sever accessible to any IP address
 ```
+#### 2. Host the REST API on a server.
+The built REST API must be hosted on a server or cloud platform (using AWS EC2) to make it accessible over the internet. Security group rules should be configured to allow the incoming traffic through port 5001 which is designed for the Flask API.
+
+#### 3. Deploy the Flask application as a production-ready server using Gunicorn. 
+
+To handle multiple concurrent requests efficiently using worker processes, Gunicorn WSGI server is used to start the web application which is built using Flask API and accessible via the server's IP. WSGI server handles the communication between web server(HTTP requests) and Python web application (The WSGI application-Flask) wich is saved inside the [file](SRC/ML_pipeline_vidisha/wsgi_vidisha.py). 
+
+The WSGI server receives the user's HTTP requests and forwards them to the WSGI application. The Flask application processes these requests, generates a response, and sends it back to the WSGI server, which then delivers the response to the user's web application.
+
+THE Gunicorn WSGI server uses the port 50001 allowing it accessible for all network inferences, runs 4 workers to handle requests concurrently and sets a timeout of 5 seconds ensuring requests don't hand indefinetely.
+
+```python
+import gunicorn
+gunicorn -b 0.0.0.0:5001 -w 4 -t 5 file:app
+```
+
+### 4. 
 
 
 
