@@ -9,8 +9,6 @@ To build the deep learning model in this project, GRU(Gated Recurrent Unit) whic
 ## Objective 
 The primary goal of this project is to develop an end-to-end automated machine learning workflow that efficiently processes data, builds a predictive model, and deploys it in development or production environments via a REST API.By establishing a streamlined automated pipeline, the project ensures scalability, facilitating seamless transitions from model training to deployment, ultimately enhancing the sentiment classification process for application reviews.
 
-## Modular code overview 
-
 ## Data 
 The dataset contains `content` and `score` columns that respectively represent the review text and the rating given by the user based on their review. The score contains values between 0-5, reflecting the sentiment expressed in the review.
 
@@ -28,7 +26,7 @@ The model building pipeline contains several steps
 - Develop a REST API using the Flask web framework to deploy the trained model.
 - Host the REST API on a server.
 - Deploy the Flask application as a production-ready server using Gunicorn.
-- Interact with Flask-based REST API via POST request
+- Interact with Flask-based REST API via POST request.
     
 ### Preprocessing the dataset 
 #### 1. Cleaning the dataset 
