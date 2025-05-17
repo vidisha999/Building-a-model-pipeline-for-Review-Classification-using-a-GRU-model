@@ -22,10 +22,9 @@ The model building pipeline contains several steps
 3. Model deployment via a REST API 
 - Develop a REST API using the Flask web framework to deploy the trained model.
 - Host the REST API on a server.
-- Deploy the Flask application as a production-ready server using Gunicorn. 
-- Implement a model engine script using subprocesses to automate the execution of multiple processes.
+- Deploy the Flask application as a production-ready server using Gunicorn.
+- Interact with Flask-based REST API via POST request
     
-
 ### Preprocessing the dataset 
 #### 1. Cleaning the dataset 
 
