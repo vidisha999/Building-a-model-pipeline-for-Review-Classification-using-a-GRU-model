@@ -13,7 +13,7 @@ ml_model=utils_vidisha.load_model(model_path)
 ## HTTP method is how client communicates with the sever, POST HTTP method is used to send review data in JSON format to the server "app" at the local endpoint using a POST request URL "/get-review-score"
 
 @app.post("/get-review-score")
-def get_image_class():
+def get_review_class():
     data=request.get_json() # parse JSON directly from the body of HTTP request to a python dictionary
     review=data['review'] # extract the value or content in the review key 
     prediction=apply_prediction(review,model)
