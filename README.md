@@ -109,24 +109,46 @@ The [model API](SRC/ML_pipeline_vidisha/deploy_vidisha.py) builds a REST API usi
 
 Flask framework to building API endpoints enables quick deployment of models by handling HTTP requests efficiently and supporting easy integration with Python-based workflows. By using Flask, developers can deploy models on cloud servers or local environments, making them accessible to web applications. This approach not only improves efficiency but also streamlines real-time predictions, allowing users to benefit from intelligent insights with minimal setup.
 
-In the model API, the API end point handler defines how to handle HTTP POST requests where a client sends JSON data containing reiew. This function uses multiple pre-defined functions **apply(path,is_train)** , **get_prediction(review,ml_model)**  from [preprocessing script](SRC/ML_pipeline_vidisha/preprocess_vidisha.py) and **load_model(model_path)** function from [utility folder](SRC/ML_pipeline_vidisha/utils_vidisha.py).
+In the model API, the API end point handler defines how to handle HTTP POST requests where a client sends JSON data containing reiew. This function uses multiple pre-defined functions **apply_prediction(review,ml_model)**  from [preprocessing script](SRC/ML_pipeline_vidisha/preprocess_vidisha.py) and **load_model(model_path)** function from [utility folder](SRC/ML_pipeline_vidisha/utils_vidisha.py).
+
+- *load_model(model_path)*: Loads the model
+  ```python
+    from tensorflow.keras.models import load_model
+    def load_model(model_path):
+    model = None
+    try:
+        model = tensorflow.keras.models.load_model(model_pah)
+    except:
+        print("please enter the correct path")
+        exit(0)
+    return model```
+
+ - *apply_prediction(review,ml_model)*: Get the predictions from the review text using the trained model
+   ```python
+    def apply_prediction(review,ml_model):
+    df = pd.DataFrame([review],columns ='content') # convert the Review string to a dataframe
+    stop_words = stopwords.words('english')
+    df_new = cleaning(df,stop_words) # preprocess data using the cleaning function
+
+    x_data = tokenize(df,df_new,is_train=0) # get the tokenized  data at the prediction phase 
+    prediction = list(ml_model.predict(x_data)[0]) # Extract the first item of the prediction output, as it may contain a 2D format
+    max_value=max(prediction)
+    max_index= prediction.index(max_value) # Find the classification class with highest probability
+    index=max_index+1 # return a 1-based index for the classification class
+    ```
 
 ```python
 from flask import request
+
+- The API endpoint handler of the REST API
 @app.post("/get-review-score")
 def get_review_class():
     data = requests.get_json()# parse JSON directly from the body of HTTP request to a python dictionary
     review = data['review'] # extract content/ review string in the review key 
     prediction=apply_prediction(review,model)
-
-
-@app.post("/get-review-score")
-def get_image_class():
-    data=request.get_json() # parse JSON directly from the body of HTTP request to a python dictionary
-    review=data['review'] # extract the value or content in the review key 
-    prediction=apply_prediction(review,model)
     output= { "Review Score" : prediction}
     return output 
+```
 
 
 
@@ -136,7 +158,7 @@ def get_image_class():
 
 
 
-- Implement a model engine script using subprocesses to automate the execution of multiple processes.
+
 
 
 
