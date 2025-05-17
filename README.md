@@ -160,7 +160,7 @@ The built REST API must be hosted on a server or cloud platform (using AWS EC2) 
 
 To handle multiple concurrent requests efficiently using worker processes, Gunicorn WSGI server is used to start the web application which is built using Flask API and accessible via the server's IP. WSGI server handles the communication between web server(HTTP requests) and Python web application (The WSGI application-Flask) wich is saved inside the [file](SRC/ML_pipeline_vidisha/wsgi_vidisha.py). 
 
-The WSGI server receives the user's HTTP requests and forwards them to the WSGI application. The Flask application processes these requests, generates a response, and sends it back to the WSGI server, which then delivers the response to the user's web application.
+The WSGI server receives the user's HTTP requests and forwards them to the WSGI application. The Flask application processes these requests, generates a response, and sends it back to the WSGI server, which then delivers the response to the user's web server/application.
 
 THE Gunicorn WSGI server uses the port 50001 allowing it accessible for all network inferences, runs 4 workers to handle requests concurrently and sets a timeout of 5 seconds ensuring requests don't hand indefinetely.
 
@@ -169,7 +169,29 @@ import gunicorn
 gunicorn -b 0.0.0.0:5001 -w 4 -t 5 file:app
 ```
 
-### 4. 
+### 4. Interact with Flask-based REST API via POST request 
+
+The following script shows the correct format of a HTTP POST request sent by the user to directly interact with the backend API instead of a traditional frontend UI for this project.
+
+```python
+import requests
+import json
+import os
+
+url = 'http://0.0.0.0:5001/get-review-score'
+
+payload = json.dumps({
+  "review": ....# review string made by the user
+})
+headers = {
+  'Content-Type': 'application/json'
+} # header specify JSON format
+
+response = requests.request("POST", url, headers=headers, data=payload) # sends the POST request and gets the response
+print(response.text)
+```
+
+
 
 
 
