@@ -137,10 +137,9 @@ In the model API, the API end point handler defines how to handle HTTP POST requ
     index=max_index+1 # return a 1-based index for the classification class
     ```
 
+- The API endpoint handler of the REST API
 ```python
 from flask import request
-
-- The API endpoint handler of the REST API
 @app.post("/get-review-score")
 def get_review_class():
     data = requests.get_json()# parse JSON directly from the body of HTTP request to a python dictionary
