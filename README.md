@@ -109,8 +109,24 @@ The [model API](SRC/ML_pipeline_vidisha/deploy_vidisha.py) builds a REST API usi
 
 Flask framework to building API endpoints enables quick deployment of models by handling HTTP requests efficiently and supporting easy integration with Python-based workflows. By using Flask, developers can deploy models on cloud servers or local environments, making them accessible to web applications. This approach not only improves efficiency but also streamlines real-time predictions, allowing users to benefit from intelligent insights with minimal setup.
 
+In the model API, the API end point handler defines how to handle HTTP POST requests where a client sends JSON data containing reiew. This function uses multiple pre-defined functions **apply(path,is_train)** , **get_prediction(review,ml_model)**  from [preprocessing script](SRC/ML_pipeline_vidisha/preprocess_vidisha.py) and **load_model(model_path)** function from [utility folder](SRC/ML_pipeline_vidisha/utils_vidisha.py).
+
+```python
+from flask import request
+@app.post("/get-review-score")
+def get_review_class():
+    data = requests.get_json()# parse JSON directly from the body of HTTP request to a python dictionary
+    review = data['review'] # extract content/ review string in the review key 
+    prediction=apply_prediction(review,model)
 
 
+@app.post("/get-review-score")
+def get_image_class():
+    data=request.get_json() # parse JSON directly from the body of HTTP request to a python dictionary
+    review=data['review'] # extract the value or content in the review key 
+    prediction=apply_prediction(review,model)
+    output= { "Review Score" : prediction}
+    return output 
 
 
 
