@@ -104,6 +104,10 @@ The following image shows the change of the  model's training accuracy and train
 ### Model Deployment
 #### 1.Develop a REST API using the Flask web framework to deploy the trained model.
 
+The [model API](SRC/ML_pipeline_vidisha/deploy_vidisha.py) builds a REST API using Flask web framework , enabling seamless integration of the trained model to applications allowing the users and systems to send data and receive real-time predictions.REST API allow models to be deployed on cloud servers, making them available to multiple clients, as well as decouples the model from application; in which model runs independently in the server and client interacts with the server via HTTP requests (POST). This  ensures that improvements in the model don’t require modifying the entire application.
+
+
+Flask framework to building API endpoints enables quick deployment of models by handling HTTP requests efficiently and supporting easy integration with Python-based workflows. By using Flask, developers can deploy models on cloud servers or local environments, making them accessible to web applications. This approach not only improves efficiency but also streamlines real-time predictions, allowing users to benefit from intelligent insights with minimal setup.
 
 
 
