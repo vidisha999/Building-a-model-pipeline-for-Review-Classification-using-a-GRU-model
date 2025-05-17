@@ -67,7 +67,7 @@ def apply(path,is_train):
 
 ## get prediction given a single review 
 
-def get_prediction(review,ml_model):
+def apply_prediction(review,ml_model):
     df = pd.DataFrame([review],columns ='content') # convert the Review string to a dataframe
     stop_words = stopwords.words('english')
     df_new = cleaning(df,stop_words) # preprocess data using the cleaning function
