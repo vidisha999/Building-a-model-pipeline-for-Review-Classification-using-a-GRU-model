@@ -93,6 +93,46 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 ```
  #### 2. Build and train the GRU model 
 
+ The **fit(x_train,y_train)** function in [train model](SRC/ML_pipeline_vidisha/train_model_vidisha.py) is  defined to iniitiate and train the model , when x and y sets of the training data are passed. To ensure model works with the structured input, ***Embedding()*** layer  is placed at the start of the model layers to  transforms raw text tokens which are in numerical values to a dense vector representation that capture semantic meanings of the words.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ def train(model, x_train, y_train):
+    batch_size = 32
+    epochs = 50
+    history = model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size, verbose='auto')
+    return model
+
+
+# Function to initiate model and training data
+def fit(x_train, y_train):
+    model = Sequential()
+    model.add(Embedding(input_dim=utils_vidisha.top_words, output_dim=120))
+    model.add(SpatialDropout1D(0.4))
+    model.add(GRU(64, dropout=0.2, recurrent_dropout=0.2))
+    model.add(Dense(5, activation='softmax'))
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    print(model.summary())
+
+    model = train(model, x_train, y_train)
+
+    return model
  
 
 
