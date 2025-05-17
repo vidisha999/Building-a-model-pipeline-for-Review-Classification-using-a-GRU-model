@@ -3,9 +3,14 @@
 ## Project Description
 The purpose of this project is to build a review classification model, that does sentiment analysis of the review text data from an application which is scaled in the rage of 1 to 5, to identify 5 as a positive sentiment and 1 as a negative sentiment. The deep learning model was built using GRU (Gated Recurrent Unit) which is a variant of RNN ( Recurrent Neural Network). The model is trained on the training review data and their properties to predict the sentiment. This project outlines an automated model pipeline from building model to its deployment enabling the use of deployed model in a scalable way to make real-time decisions based on the sentiment predictions of the app reviews.
 
-## GRU ---importance of GRU as a RNN 
+## Background 
+To build the deep learning model in this project, GRU(Gated Recurrent Unit) which is a variant of RNN( Recurrent Neural Network) is used. Unlike traditional deep neural networks, RNN can process textual data and have the capability to capture the sequential dependencies and contextual relationships between words, making them effective for tasks such as sentiment analysis. However, due to the vainishing gradient problem during the backpropogation, the traditional RNNs become inefective in capturing long-term dependencies in long textual sequences. GRUs are a powerful variant of RNNs that effectively overcome the vanishing gradient problem, similar to Long Short-Term Memory (LSTM) networks. However, GRUs feature a simpler architecture compared to LSTMs, making them less complex and more computationally efficient. This efficiency makes GRUs particularly well-suited for the sentiment analysis task in this project, where processing sequential review data accurately and quickly is essential.
+
 ## Objective 
+The primary goal of this project is to develop an end-to-end automated machine learning workflow that efficiently processes data, builds a predictive model, and deploys it in development or production environments via a REST API.By establishing a streamlined automated pipeline, the project ensures scalability, facilitating seamless transitions from model training to deployment, ultimately enhancing the sentiment classification process for application reviews.
+
 ## Modular code overview 
+
 ## Data 
 The dataset contains `content` and `score` columns that respectively represent the review text and the rating given by the user based on their review. The score contains values between 0-5, reflecting the sentiment expressed in the review.
 
