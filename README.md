@@ -93,7 +93,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 ```
  #### 2. Build and train the GRU model 
 
-The **fit(x_train,y_train)** function in [train model](SRC/ML_pipeline_vidisha/train_model_vidisha.py) is  defined to iniitiate and train the model , when x and y sets of the training data are given. 
+The **fit(x_train,y_train)** function in [train model](SRC/ML_pipeline_vidisha/train_model_vidisha.py) is  defined to iniitiate and train the model , when x and y sets of the training data are given. The **train(model, x_train, y_train)** function shows the training data is split into 32 batches, to make training more manageable and computationally efficient. The model computes gradients and updates weights after processing each batch, continuing until all batches in the dataset have been processed, completing one epoch. During training, the model iterates through the entire dataset 50 times (epochs=50), allowing it to learn deeper patterns and improve its performance. To prevent overfitting, the number of epochs is capped at 50, ensuring the model generalizes well to new data.
 
 To ensure model works with the structured input, ***Embedding()*** layer  is placed at the start of the model layers to  transform the raw text tokens which are in numerical values to a dense vector representation that capture semantic meanings of the words. ***SpatialDropout()*** layer drops entire feature maps instead of randomly dropping neurons, ensuring the model doesn't become overly dependent on specific word patterns. This regularization technique prevents overfitting of the sequence-based text data and improve generalization making the model more robust for unseen data. The output, ***Dense()*** layer contains 5 neurons corresponding to 5 sentiment categories and uses softmax activation enabling model to assign confidence score to each sentiment category.
 
@@ -105,42 +105,6 @@ To ensure model works with the structured input, ***Embedding()*** layer  is pla
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- def train(model, x_train, y_train):
-    batch_size = 32
-    epochs = 50
-    history = model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size, verbose='auto')
-    return model
-
-
-# Function to initiate model and training data
-def fit(x_train, y_train):
-    model = Sequential()
-    model.add(Embedding(input_dim=utils_vidisha.top_words, output_dim=120))
-    model.add(SpatialDropout1D(0.4))
-    model.add(GRU(64, dropout=0.2, recurrent_dropout=0.2))
-    model.add(Dense(5, activation='softmax'))
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    print(model.summary())
-
-    model = train(model, x_train, y_train)
-
-    return model
- 
 
 
 
